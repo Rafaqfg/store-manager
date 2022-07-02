@@ -9,7 +9,6 @@ const productsModel = {
 
   async listIdProduct(ID) {
     const select = 'SELECT * FROM PRODUCTS WHERE ID = ?';
-    console.log(select);
     const [product] = await db.query(select, ID);
     return product;
   },
