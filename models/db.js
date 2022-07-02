@@ -8,4 +8,4 @@ const db = mysql.createPool({
   database: process.env.MYSQL_DATABASE || 'StoreManager',
 });
 
-  module.esports = db;
+  module.exports = db;
