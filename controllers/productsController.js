@@ -9,10 +9,14 @@ const productsController = {
     res.status(httpStatus.OK).json(products);
   },
 
-  async listIdProduct(req, _res) {
+  async listIdProduct(req, res) {
     const { id } = req.params;
     const product = await listIdProduct(id);
-    console.log(product);
+    if (product.length > 0) {
+      return res.status(httpStatus.NOT_FOUND)
+      .json({ message: 'Product not found' }); 
+    }
+    res.status(httpStatus.OK).json(product);
   },
 };
 
