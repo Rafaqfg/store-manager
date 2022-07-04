@@ -1,7 +1,7 @@
 const httpStatus = require('../utils/httpStatus');
 const { listAllProducts, listIdProduct } = require('../services/productsService');
 
-const productsController = {
+const productsControllers = {
   /** @type {import('express').RequestHandler} */
 
   async listAllProducts(_req, res) {
@@ -20,4 +20,4 @@ const productsController = {
   },
 };
 
-module.exports = productsController;
+module.exports = productsControllers;
