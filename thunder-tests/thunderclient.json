@@ -4,11 +4,11 @@
     "colId": "fdd5fbfa-67f7-425d-9375-9051d188c499",
     "containerId": "",
     "name": "/products",
-    "url": "localhost:3000/products/2312",
+    "url": "localhost:3000/products/1",
     "method": "GET",
     "sortNum": 10000,
     "created": "2022-07-02T19:08:27.608Z",
-    "modified": "2022-07-02T21:25:27.087Z",
+    "modified": "2022-07-04T16:15:59.356Z",
     "headers": [],
     "params": [],
     "tests": []

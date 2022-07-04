@@ -11,8 +11,8 @@ const productsController = {
 
   async listIdProduct(req, res) {
     const { id } = req.params;
-    const product = await listIdProduct(id);
-    if (product.length > 0) {
+    const [product] = await listIdProduct(id);
+    if (!product) {
       return res.status(httpStatus.NOT_FOUND)
       .json({ message: 'Product not found' }); 
     }
