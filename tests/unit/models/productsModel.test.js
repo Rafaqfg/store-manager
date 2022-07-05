@@ -13,12 +13,12 @@ describe('models/productsModel', () => {
 
     it('should throw error if mysql throw error', () => {
       sinon.stub(db, 'query').rejects();
-      chai.expect(productsModel.listAllProducts()).to.eventually.be.rejected;
+      return chai.expect(productsModel.listAllProducts()).to.eventually.be.rejected;
     })
   
     it('should return an array of objects', () => {
-      sinon.stub(db, 'query').resolves([{}]);
-      chai.expect(productsModel.listAllProducts()).to.eventually.be.true;
+      sinon.stub(db, 'query').resolves([]);
+      return chai.expect(productsModel.listAllProducts()).to.eventually.be.equal();
     })
   })
 
@@ -26,16 +26,16 @@ describe('models/productsModel', () => {
 
     it('should throw error if mysql throw error', () => {
       sinon.stub(db, 'query').rejects();
-      chai.expect(productsModel.listIdProduct(1)).to.eventually.be.rejected;
+      return chai.expect(productsModel.listIdProduct(1)).to.eventually.be.rejected;
     })
 
     it('should return an object', () => {
       sinon.stub(db, 'query').resolves({});
-      chai.expect(productsModel.listAllProducts(1)).to.eventually.be.equal;
+      return chai.expect(productsModel.listAllProducts(1)).to.eventually.be.equal;
     })
     it('should return an object with key name', () => {
       sinon.stub(db, 'query').resolves({});
-      chai.expect(productsModel.listAllProducts(1)).to.eventually.be.equal;
+      return chai.expect(productsModel.listAllProducts(1)).to.eventually.be.equal;
     })
   })
 })
