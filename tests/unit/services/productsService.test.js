@@ -18,7 +18,7 @@ describe('services/productsService', () => {
 
     it('should resolves if productModel.listAllProducts resolves', () => {
       sinon.stub(productsModel, 'listAllProducts').resolves();
-      return chai.expect(productsService.listAllProducts()).to.eventually.be.true;
+      return chai.expect(productsService.listAllProducts()).to.eventually.be.fulfilled;
     })
   })
 
@@ -31,7 +31,7 @@ describe('services/productsService', () => {
 
     it('should resolves if productModel.listIdProduct resolves', () => {
       sinon.stub(productsModel, 'listIdProduct').resolves();
-      return chai.expect(productsService.listIdProduct()).to.eventually.be.true;
+      return chai.expect(productsService.listIdProduct()).to.eventually.be.fulfilled;
     })
   })
 })
