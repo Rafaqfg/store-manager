@@ -12,6 +12,18 @@ const productsModel = {
     const [product] = await db.query(select, ID);
     return product;
   },
+
+  async addProduct(name) {
+    const insert = 'INSERT INTO products (name) VALUES (?);';
+    const [{ insertId }] = await db.query(insert, [name]);
+    const newProduct = {
+      id: insertId,
+      name,
+    };
+    console.log(newProduct);
+    return newProduct;
+  },
+
 };
 
 module.exports = productsModel;
