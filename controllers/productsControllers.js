@@ -1,17 +1,17 @@
 const httpStatus = require('../utils/httpStatus');
-const productsService = require('../services/productsService');
+const productsServices = require('../services/productsServices');
 
 const productsControllers = {
   /** @type {import('express').RequestHandler} */
 
   async listAllProducts(_req, res) {
-    const products = await productsService.listAllProducts();
+    const products = await productsServices.listAllProducts();
     res.status(httpStatus.OK).json(products);
   },
 
   async listIdProduct(req, res) {
     const { params: { id } } = req;
-    const [product] = await productsService.listIdProduct(id);
+    const [product] = await productsServices.listIdProduct(id);
     if (!product) {
       return res.status(httpStatus.NOT_FOUND)
         .json({ message: 'Product not found' }); 
@@ -21,8 +21,8 @@ const productsControllers = {
 
   async addProduct(req, res) {
     const { body } = req;
-    const { name } = await productsService.validateName(body);
-    const newProduct = await productsService.addProduct(name);
+    const { name } = await productsServices.validateName(body);
+    const newProduct = await productsServices.addProduct(name);
     res.status(httpStatus.CREATED).json(newProduct);
   },
 };
