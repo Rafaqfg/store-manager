@@ -20,12 +20,9 @@ const productsControllers = {
   },
 
   async addProduct(req, res) {
-    const { body: { name } } = req;
+    const { body } = req;
+    const name = await productsService.validateName(body);
     const newProduct = await productsService.addProduct(name);
-    if (!newProduct) {
-      return res.status(httpStatus.SERVER_ERROR)
-        .json({ message: 'error' });
-    }
     res.status(httpStatus.CREATED).json(newProduct);
   },
 };

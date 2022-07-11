@@ -20,7 +20,6 @@ const productsModel = {
       id: insertId,
       name,
     };
-    console.log(newProduct);
     return newProduct;
   },
 

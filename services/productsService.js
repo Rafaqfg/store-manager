@@ -1,3 +1,5 @@
+const Joi = require('joi');
+const { runSchema } = require('../utils/validators');
 const productModel = require('../models/productsModel');
 
 const productsService = {
@@ -11,10 +13,15 @@ const productsService = {
     return product;
   },
 
+  validateName: runSchema(Joi.object({
+    name: Joi.string().required().min(5),
+  })),
+
   async addProduct(name) {
     const newProduct = await productModel.addProduct(name);
     return newProduct;
   },
+
 };
 
 module.exports = productsService;
