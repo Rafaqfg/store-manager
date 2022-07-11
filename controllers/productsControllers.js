@@ -21,7 +21,7 @@ const productsControllers = {
 
   async addProduct(req, res) {
     const { body } = req;
-    const name = await productsService.validateName(body);
+    const { name } = await productsService.validateName(body);
     const newProduct = await productsService.addProduct(name);
     res.status(httpStatus.CREATED).json(newProduct);
   },
