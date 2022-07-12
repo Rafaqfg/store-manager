@@ -9,6 +9,9 @@ const errorMiddleware = (error, _req, res, _next) => {
     return res.status(httpStatus.UNPROCESSABLE_ENTITY)
       .json({ message: '"name" length must be at least 5 characters long' });
   }
+  if (message.includes('productId')) {
+    return res.status(httpStatus.BAD_REQUEST).json({ message: '"productId" is required' });
+  }
   return res.status(httpStatus.SERVER_ERROR).json({ message: 'server error' });
 };
 
