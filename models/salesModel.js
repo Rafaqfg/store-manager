@@ -4,7 +4,7 @@ const salesModel = {
 
   async createSale(saleId, productId, quantity) {
     const insert = 'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?);';
-    await db.query(insert, [saleId, productId, quantity])
+    await db.query(insert, [saleId, productId, quantity]);
   },
 
   async addSaleId() {
