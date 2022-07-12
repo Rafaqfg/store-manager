@@ -6,13 +6,14 @@ const salesControllers = {
 
   async createSale(req, res) {
     const sale = req.body;
-    sale.forEach((item) => {
-      salesServices.validateSale(item);
-    });
+    await salesServices.saleIsValid(sale);
+    const validateId = (await salesServices.validateId(sale))
+      .every((item) => (item.length > 0));
+    if (!validateId) throw new Error('Product not found');
+    
     const newSale = await salesServices.createSale(sale);
     res.status(httpStatus.CREATED).json(newSale);
-  }
-
-}
+  },
+};
 
 module.exports = salesControllers;
