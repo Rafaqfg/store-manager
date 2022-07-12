@@ -3,7 +3,7 @@ const runSchema = (schema) => async (unknown) => {
     const value = await schema.validateAsync(unknown);
     return value;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 };
 
