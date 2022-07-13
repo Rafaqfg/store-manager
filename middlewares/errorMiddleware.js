@@ -2,7 +2,6 @@ const httpStatus = require('../utils/httpStatus');
 
 const errorMiddleware = (error, _req, res, _next) => {
   const { message } = error;
-  console.log(error);
   if (message.includes('required')) {
     return res.status(httpStatus.BAD_REQUEST).json({ message });
   }
