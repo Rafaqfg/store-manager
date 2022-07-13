@@ -12,6 +12,37 @@ const salesModel = {
     const [{ insertId }] = await db.query(insert);
     return insertId;
   },
+
+  async getAllSalesList() {
+    const select = `
+      SELECT
+      sale.id AS saleId,
+      sale.date,
+      salesProducts.product_id AS productId,
+      salesProducts.quantity
+      FROM sales_products AS salesProducts
+      JOIN sales AS sale
+      ON sale.id = salesProducts.sale_id
+    `;
+    const [sales] = await db.query(select);
+    return sales;
+  },
+
+  async getSaleById(id) {
+    const select = `
+      SELECT
+      sale.date,
+      salesProducts.product_id AS productId,
+      salesProducts.quantity
+      FROM sales_products AS salesProducts
+      JOIN sales AS sale
+      ON sale.id = salesProducts.sale_id
+      WHERE sale.id = ?
+      `;
+    const [sale] = await db.query(select, [id]);
+    return sale;
+  },
+
 };
 
 module.exports = salesModel;

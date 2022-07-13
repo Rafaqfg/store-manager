@@ -41,14 +41,28 @@
     "method": "POST",
     "sortNum": 30000,
     "created": "2022-07-12T13:19:31.544Z",
-    "modified": "2022-07-12T21:23:29.118Z",
+    "modified": "2022-07-13T00:16:17.225Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "  [\n    {\n      \"productId\": 1,\n      \"quantity\": 1\n    },\n    {\n      \"productId\": 2,\n      \"quantity\":5\n    }\n  ]",
+      "raw": "  [\n    {\n      \"productId\": 8,\n      \"quantity\": 1\n    },\n    {\n      \"productId\": 2,\n      \"quantity\":5\n    }\n  ]",
       "form": []
     },
+    "tests": []
+  },
+  {
+    "_id": "4ab4fcb5-e6bd-4815-a4fa-7688aad8ccd1",
+    "colId": "fdd5fbfa-67f7-425d-9375-9051d188c499",
+    "containerId": "ed31eb99-e622-435a-9b2c-a9790b514966",
+    "name": "/sales",
+    "url": "localhost:3000/sales/15",
+    "method": "GET",
+    "sortNum": 40000,
+    "created": "2022-07-12T23:33:33.938Z",
+    "modified": "2022-07-13T00:39:50.636Z",
+    "headers": [],
+    "params": [],
     "tests": []
   }
 ]
