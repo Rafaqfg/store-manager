@@ -14,6 +14,20 @@ const salesControllers = {
     const newSale = await salesServices.createSale(sale);
     res.status(httpStatus.CREATED).json(newSale);
   },
+
+  async getAllSalesList(_req, res) {
+    const salesList = await salesServices.getAllSalesList();
+    res.status(httpStatus.OK).json(salesList);
+  },
+
+  async getSaleById(req, res) {
+    const { params: { id } } = req;
+    const sale = await salesServices.getSaleById(id);
+    if (!sale) {
+      return res.status(httpStatus.NOT_FOUND).json({ message: 'Sale not found' });
+    }
+    res.status(httpStatus.OK).json(sale);
+  },
 };
 
 module.exports = salesControllers;
