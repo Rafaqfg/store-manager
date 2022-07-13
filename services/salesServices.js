@@ -38,6 +38,25 @@ const salesServices = {
     };
     return newSale;
   },
+
+  async getAllSalesList() {
+    const salesList = await salesModel.getAllSalesList();
+    return salesList;
+  },
+
+  async getSaleById(id) {
+    const sale = await salesModel.getSaleById(id);
+    if (sale.length === 0) return false;
+    const saleById = sale.map((item) => {
+      const response = {
+        date: item.date,
+        productId: item.productId,
+        quantity: item.quantity,
+      };
+      return response;
+    });
+    return saleById;
+  },
 };
 
 module.exports = salesServices;
