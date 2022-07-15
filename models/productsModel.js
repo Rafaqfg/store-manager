@@ -39,7 +39,7 @@ const productsModel = {
     const deleteQuery = 'DELETE FROM products WHERE id = ?;';
     const deleted = await db.query(deleteQuery, [id]);
     return !!deleted;
-  }
+  },
 };
 
 module.exports = productsModel;
