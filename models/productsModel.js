@@ -23,6 +23,17 @@ const productsModel = {
     return newProduct;
   },
 
+  async updateProduct(id, name) {
+    const update = `
+      UPDATE
+      products SET
+      name = ?
+      WHERE
+      id = ?;
+      `;
+    const [response] = await db.query(update, [name, id]);
+    return !!response;
+  },
 };
 
 module.exports = productsModel;
