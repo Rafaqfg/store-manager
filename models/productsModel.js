@@ -40,6 +40,12 @@ const productsModel = {
     const deleted = await db.query(deleteQuery, [id]);
     return !!deleted;
   },
+
+  async listProductsByName(q) {
+    const select = 'SELECT * FROM products WHERE name LIKE ?;';
+    const [products] = await db.query(select, [`%${q}%`]);
+    return products;
+  },
 };
 
 module.exports = productsModel;
