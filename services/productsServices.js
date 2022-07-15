@@ -40,6 +40,11 @@ const productsServices = {
     const deleted = await productsModel.deleteProduct(id);
     return !!deleted;
   },
+
+  async listProductsByName(q) {
+    const products = await productsModel.listProductsByName(q);
+    return products;
+  },
 };
 
 module.exports = productsServices;
