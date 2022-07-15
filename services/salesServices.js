@@ -46,7 +46,9 @@ const salesServices = {
 
   async getSaleById(id) {
     const sale = await salesModel.getSaleById(id);
-    if (sale.length === 0) return false;
+    if (sale.length === 0) {
+      throw new Error('Sale not found');
+    }
     const saleById = sale.map((item) => {
       const response = {
         date: item.date,
@@ -56,6 +58,16 @@ const salesServices = {
       return response;
     });
     return saleById;
+  },
+
+  async saleExist(id) {
+    const sale = await this.getSaleById(id);
+    return !!sale;
+  },
+
+  async deleteSale(id) {
+    const deleted = await salesModel.deleteSale(id);
+    return !!deleted;
   },
 };
 
