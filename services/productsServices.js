@@ -24,7 +24,6 @@ const productsServices = {
 
   async productExist(id) {
     const product = await this.listIdProduct(id);
-
     if (product.length > 0) {
       return true;
     }

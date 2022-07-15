@@ -97,5 +97,19 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "07b0eb3d-e0be-4eee-b97e-d5ab5baff074",
+    "colId": "fdd5fbfa-67f7-425d-9375-9051d188c499",
+    "containerId": "ed31eb99-e622-435a-9b2c-a9790b514966",
+    "name": "/sales/:id",
+    "url": "localhost:3000/sales/1",
+    "method": "DELETE",
+    "sortNum": 70000,
+    "created": "2022-07-15T13:57:37.417Z",
+    "modified": "2022-07-15T14:20:52.091Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
