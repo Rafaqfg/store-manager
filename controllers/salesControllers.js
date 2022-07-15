@@ -12,9 +12,6 @@ const salesControllers = {
   async getSaleById(req, res) {
     const { params: { id } } = req;
     const sale = await salesServices.getSaleById(id);
-    if (!sale) {
-      return res.status(httpStatus.NOT_FOUND).json({ message: 'Sale not found' });
-    }
     res.status(httpStatus.OK).json(sale);
   },
 
@@ -27,6 +24,16 @@ const salesControllers = {
     
     const newSale = await salesServices.createSale(sale);
     res.status(httpStatus.CREATED).json(newSale);
+  },
+
+  async deleteSale(req, res) {
+    const { params: { id } } = req;
+    const saleExist = await salesServices.saleExist(id);
+    if (saleExist) {
+    await salesServices.deleteSale(id);
+      return res.status(httpStatus.NO_CONTENT).send();
+    }
+    return res.status(httpStatus.NOT_FOUND).json({ message: 'Sale not found' });
   },
 };
 
