@@ -41,6 +41,17 @@ const productsControllers = {
     await productsServices.deleteProduct(id);
     res.status(httpStatus.NO_CONTENT).send();
   },
+
+  async listProductsByName(req, res) {
+    const { query: { q } } = req;
+    if (!q) {
+      const products = await productsServices.listAllProducts();
+      return res.status(httpStatus.OK).json(products);
+    }
+    await productsServices.validateName({ name: q });
+    const products = await productsServices.listProductsByName(q);
+    res.status(httpStatus.OK).json(products);
+  },
 };
 
 module.exports = productsControllers;
