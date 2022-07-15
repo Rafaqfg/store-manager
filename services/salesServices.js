@@ -10,7 +10,7 @@ const salesServices = {
     quantity: Joi.number().required().min(1),
   })),
 
-  async validateId(arr) {
+  async validateProductId(arr) {
     const exists = await Promise.all(
       arr.map((item) => (
         productsModel.listIdProduct(item.productId)
@@ -49,7 +49,7 @@ const salesServices = {
     if (sale.length === 0) {
       throw new Error('Sale not found');
     }
-    const saleById = sale.map((item) => {
+    const saleById = await sale.map((item) => {
       const response = {
         date: item.date,
         productId: item.productId,
@@ -68,6 +68,26 @@ const salesServices = {
   async deleteSale(id) {
     const deleted = await salesModel.deleteSale(id);
     return !!deleted;
+  },
+
+  async updateSale(id, sale) {
+    try {
+      await salesModel.updateSale(id, sale);
+      const getUpdatedSale = await this.getSaleById(id);
+      const updatedSale = {
+        saleId: id,
+        itemsUpdated: getUpdatedSale.map((item) => {
+          const obj = {
+            productId: item.productId,
+            quantity: item.quantity,
+          };
+          return obj;
+        }),
+      };
+      return updatedSale;
+    } catch (error) {
+      throw new Error(error);
+    }
   },
 };
 

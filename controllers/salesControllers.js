@@ -18,22 +18,30 @@ const salesControllers = {
   async createSale(req, res) {
     const sale = req.body;
     await salesServices.saleIsValid(sale);
-    const isValid = (await salesServices.validateId(sale))
+    const isValid = (await salesServices.validateProductId(sale))
       .every((item) => (item.length > 0));
     if (!isValid) throw new Error('Product not found');
-    
     const newSale = await salesServices.createSale(sale);
     res.status(httpStatus.CREATED).json(newSale);
   },
 
   async deleteSale(req, res) {
     const { params: { id } } = req;
-    const saleExist = await salesServices.saleExist(id);
-    if (saleExist) {
+    await salesServices.saleExist(id);
     await salesServices.deleteSale(id);
       return res.status(httpStatus.NO_CONTENT).send();
-    }
-    return res.status(httpStatus.NOT_FOUND).json({ message: 'Sale not found' });
+  },
+
+  async updateSale(req, res) {
+    const { params: { id } } = req;
+    const sale = req.body;
+    await salesServices.saleExist(id);
+    await salesServices.saleIsValid(sale);
+    const isValid = (await salesServices.validateProductId(sale))
+      .every((item) => (item.length > 0));
+    if (!isValid) throw new Error('Product not found');
+    const updatedSale = await salesServices.updateSale(id, sale);
+    res.status(httpStatus.OK).json(updatedSale);
   },
 };
 

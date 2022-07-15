@@ -38,7 +38,7 @@ const salesModel = {
       JOIN sales AS sale
       ON sale.id = salesProducts.sale_id
       WHERE sale.id = ?
-      `;
+    `;
     const [sale] = await db.query(select, [id]);
     return sale;
   },
@@ -47,6 +47,16 @@ const salesModel = {
     const deleteQuery = 'DELETE FROM sales WHERE id = ?;';
     const deleted = await db.query(deleteQuery, [id]);
     return !!deleted;
+  },
+
+  async updateSale(id, sale) {
+    const update = `
+      UPDATE StoreManager.sales_products SET quantity = ?
+      WHERE sale_id = ? AND product_id = ?;
+    `;
+    await Promise.all(sale.map(async (product) => {
+      await db.query(update, [product.quantity, id, product.productId]);
+    }));
   },
 };
 
