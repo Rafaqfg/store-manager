@@ -24,6 +24,7 @@ const productsServices = {
 
   async productExist(id) {
     const product = await this.listIdProduct(id);
+
     if (product.length > 0) {
       return true;
     }
@@ -35,6 +36,11 @@ const productsServices = {
     const productUpdated = this.listIdProduct(id);
     return productUpdated;
   },
+
+  async deleteProduct(id) {
+    const deleted = await productsModel.deleteProduct(id);
+    return !!deleted;
+  }
 };
 
 module.exports = productsServices;
