@@ -22,6 +22,19 @@ const productsServices = {
     return newProduct;
   },
 
+  async productExist(id) {
+    const product = await this.listIdProduct(id);
+    if (product.length > 0) {
+      return true;
+    };
+    throw new Error('Product not found');
+  },
+
+  async updateProduct(id, name) {
+    await productsModel.updateProduct(id, name);
+    const productUpdated = this.listIdProduct(id);
+    return productUpdated;
+  },
 };
 
 module.exports = productsServices;
