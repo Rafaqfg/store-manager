@@ -26,7 +26,7 @@ const productsServices = {
     const product = await this.listIdProduct(id);
     if (product.length > 0) {
       return true;
-    };
+    }
     throw new Error('Product not found');
   },
 
