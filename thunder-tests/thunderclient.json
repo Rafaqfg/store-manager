@@ -4,11 +4,11 @@
     "colId": "fdd5fbfa-67f7-425d-9375-9051d188c499",
     "containerId": "3bfbc4d2-bfa5-44ea-83e9-ab1227c0da45",
     "name": "/products",
-    "url": "localhost:3000/products/1",
+    "url": "localhost:3000/products/2",
     "method": "GET",
     "sortNum": 10000,
     "created": "2022-07-02T19:08:27.608Z",
-    "modified": "2022-07-15T13:07:07.148Z",
+    "modified": "2022-07-15T13:40:26.949Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -82,6 +82,20 @@
       "raw": "{\n    \"name\": \"Mar\"\n}",
       "form": []
     },
+    "tests": []
+  },
+  {
+    "_id": "185e2c3b-2e89-4d0e-a616-23061fc2fae0",
+    "colId": "fdd5fbfa-67f7-425d-9375-9051d188c499",
+    "containerId": "3bfbc4d2-bfa5-44ea-83e9-ab1227c0da45",
+    "name": "/products/:id",
+    "url": "localhost:3000/products/3",
+    "method": "DELETE",
+    "sortNum": 60000,
+    "created": "2022-07-15T13:30:42.979Z",
+    "modified": "2022-07-15T13:41:52.986Z",
+    "headers": [],
+    "params": [],
     "tests": []
   }
 ]
