@@ -3,7 +3,6 @@ const sinon = require('sinon');
 const chaiAsPromised = require('chai-as-promised');
 const productsModel = require('../../../models/productsModel');
 const db = require('../../../models/db');
-const { expect } = require('chai');
 
 chai.use(chaiAsPromised);
 
