@@ -69,9 +69,45 @@ describe('services/productsServices', () => {
     })
 
     it('5.2 should resolves if productModel.deleteProduct resolves', () => {
-      sinon.stub(productsModel, 'deleteProduct').resolves();
+      sinon.stub(productsModel, 'deleteProduct').resolves(true);
       return chai.expect(productsServices.deleteProduct()).to.eventually.be.true;
     })
   });
 
+  describe('6. Test productsServices.productExist function', () => {
+
+    it('6.1 should throw error if productsServices.listIdProduct throw error', () => {
+      sinon.stub(productsServices, 'listIdProduct').rejects();
+      return chai.expect(productsServices.productExist()).to.eventually.be.rejected;
+    })
+
+    it('6.2 should resolves if productsServices.listIdProduct resolves', async () => {
+      const id = 1;
+      sinon.stub(productsServices, 'listIdProduct').resolves([{}, {}]);
+      const response = await productsServices.productExist(id);
+      return chai.expect(response).to.be.true;
+    })
+  });
+
+  describe('7. Test productsServices.updateProduct function', () => {
+
+    it('7.1 should throw error if productsModel.updateProduct throw error', () => {
+      sinon.stub(productsModel, 'updateProduct').rejects();
+      return chai.expect(productsServices.updateProduct()).to.eventually.be.rejected;
+    })
+
+    it('7.2 should throw error if productsServices.listIdProduct throw error', () => {
+      sinon.stub(productsModel, 'updateProduct').resolves(true);
+      sinon.stub(productsServices, 'listIdProduct').rejects();
+      return chai.expect(productsServices.updateProduct()).to.eventually.be.rejected;
+    })
+
+    it('7.2 should resolves if productsServices.listIdProduct resolves', async () => {
+      const id = 1;
+      const name = 'Martelo';
+      sinon.stub(productsModel, 'updateProduct').resolves(true);
+      sinon.stub(productsServices, 'listIdProduct').resolves([]);
+      return chai.expect(productsServices.updateProduct(id, name)).to.eventually.be.fulfilled;
+    })
+  });
 })
