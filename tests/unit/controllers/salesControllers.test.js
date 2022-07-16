@@ -61,7 +61,6 @@ describe('controllers/salesControllers', () => {
       sinon.stub(salesServices, 'saleIsValid').resolves(sale);
       sinon.stub(salesServices, 'validateProductId').rejects(false);
       return chai.expect(salesControllers.createSale([])).to.eventually.be.rejected;
-
     })
 
     it('3.3 should call res method with status 201 and return an object if createSale resolves', async () => {
@@ -88,6 +87,7 @@ describe('controllers/salesControllers', () => {
       sinon.stub(salesServices, 'saleExist').rejects(false);
       return chai.expect(salesControllers.deleteSale()).to.eventually.be.rejected;
     })
+    
     it('4.2 should throw error if salesServices.deleteSale throw error', () => {
       sinon.stub(salesServices, 'saleExist').resolves(true);
       sinon.stub(salesServices, 'deleteSale').rejects(false);
@@ -140,8 +140,6 @@ describe('controllers/salesControllers', () => {
       return chai.expect(salesControllers.updateSale()).to.eventually.be.rejected;
     })
 
-    
-
     it('5.4 should throw error if salesServices.validateProductId returns an empty array', async () => {
       sinon.stub(salesServices, 'saleExist').resolves(true);
       sinon.stub(salesServices, 'saleIsValid').resolves(sale);
@@ -150,9 +148,6 @@ describe('controllers/salesControllers', () => {
       return chai.expect(response).to.eventually.be.rejectedWith(Error('Product not found'));
     })
 
-
-
-    
     it('5.5 should throw error if salesServices.updateSale throw error', () => {
       const sale = [{}];
       sinon.stub(salesServices, 'saleExist').resolves(true);
