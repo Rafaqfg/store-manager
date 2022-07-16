@@ -29,7 +29,7 @@ const salesControllers = {
     const { params: { id } } = req;
     await salesServices.saleExist(id);
     await salesServices.deleteSale(id);
-      return res.status(httpStatus.NO_CONTENT).send();
+    res.status(httpStatus.NO_CONTENT).send();
   },
 
   async updateSale(req, res) {

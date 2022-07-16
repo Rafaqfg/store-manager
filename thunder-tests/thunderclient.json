@@ -56,11 +56,11 @@
     "colId": "fdd5fbfa-67f7-425d-9375-9051d188c499",
     "containerId": "ed31eb99-e622-435a-9b2c-a9790b514966",
     "name": "/sales",
-    "url": "localhost:3000/sales/1",
+    "url": "localhost:3000/sales/16",
     "method": "GET",
     "sortNum": 40000,
     "created": "2022-07-12T23:33:33.938Z",
-    "modified": "2022-07-15T19:09:37.093Z",
+    "modified": "2022-07-15T21:34:50.200Z",
     "headers": [],
     "params": [],
     "tests": []
