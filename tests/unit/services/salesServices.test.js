@@ -85,7 +85,7 @@ describe('services/salesServices', () => {
         id: 5,
         itemsSold: [],
       };
-      const saleList = [];
+      const saleList = [{}];
       const id = 1;
       const list = [{}, {}]
       
