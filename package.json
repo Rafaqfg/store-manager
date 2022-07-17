@@ -14,8 +14,7 @@
     "debug": "nodemon --ignore coverage index.js",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js, .jsx",
     "migration": "node -e \"require('./__tests__/_utils').runMigration()\"",
-    "seed": "node -e \"require('./__tests__/_utils').runSeed()\"",
-    "compose":"docker-compose -f docker-compose.dev.yml down && docker-compose -f docker-compose.dev.yml up -d"
+    "seed": "node -e \"require('./__tests__/_utils').runSeed()\""
   },
   "repository": {
     "type": "git",

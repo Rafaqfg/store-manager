@@ -55,6 +55,11 @@ describe('models/productsModel', () => {
       sinon.stub(db, 'query').resolves(newProduct);
       return chai.expect(productsModel.addProduct('Martelo')).to.eventually.be.equal;
     })
+
+    it('3.3 should return an object with keys "id" and "name"', () => {
+      sinon.stub(db, 'query').resolves([{ insertId: 1 }]);
+      return chai.expect(productsModel.addProduct('Martelo')).to.eventually.be.deep.equal(newProduct);
+    })
   });
 
   describe('4. Test productsModel.updateProduct function', () => {

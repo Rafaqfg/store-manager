@@ -111,7 +111,7 @@ describe('controllers/salesControllers', () => {
     const sale = [];
     const res = {};
     const req = {
-      params: { id: 1 },
+      params: { id: 3 },
       body: [
         {
           "productId": 1,
@@ -141,11 +141,16 @@ describe('controllers/salesControllers', () => {
     })
 
     it('5.4 should throw error if salesServices.validateProductId returns an empty array', async () => {
+      const res = {
+        status: sinon.stub().callsFake(() => res),
+        json: sinon.stub().returns(),
+      };
       sinon.stub(salesServices, 'saleExist').resolves(true);
       sinon.stub(salesServices, 'saleIsValid').resolves(sale);
       sinon.stub(salesServices, 'validateProductId').resolves([]);
-      const response = await salesControllers.updateSale(req, res);
-      return chai.expect(response).to.eventually.be.rejectedWith(Error('Product not found'));
+      await salesControllers.updateSale(req, res);
+      // return chai.expect(response).to.eventually.throw(Error);
+      chai.expect(salesControllers.updateSale(req, res)).to.eventually.throw(Error('Product not found'))
     })
 
     it('5.5 should throw error if salesServices.updateSale throw error', () => {
@@ -172,21 +177,14 @@ describe('controllers/salesControllers', () => {
           }
         ]
       };
-      // const res = {
-      //   status: sinon.stub().callsFake(() => res),
-      //   json: sinon.stub().returns(),
-      // };
       sinon.stub(salesServices, 'saleExist').resolves(true);
       sinon.stub(salesServices, 'saleIsValid').resolves(sale);
       sinon.stub(salesServices, 'validateProductId').resolves([[{}], [{}]]);
       sinon.stub(salesServices, 'updateSale').resolves(result);
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns(result);
-      const response = await salesControllers.updateSale(req, res);
-      // chai.expect(res.status.getCall(0).args[0]).to.equal(200);
-      // chai.expect(res.json.getCall(0).args[0]).to.deep.equal(obj);
+      await salesControllers.updateSale(req, res);
       chai.expect(res.status.calledWith(200)).to.be.equal(true);
-      chai.expect(response).to.be.an('object').with.keys('saleId', 'itemsUpdated');
     })
   })
 });
