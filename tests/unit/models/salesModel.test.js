@@ -96,5 +96,4 @@ describe('models/salesModel', () => {
       return chai.expect(salesModel.updateSale(1, sale)).to.eventually.be.equal;
     });
   });
-
 });

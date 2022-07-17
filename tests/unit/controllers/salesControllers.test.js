@@ -149,13 +149,6 @@ describe('controllers/salesControllers', () => {
     })
 
     it('5.4 should throw error if salesServices.validateProductId returns an empty array', async () => {
-      // const req = {
-      //   params: {id: 1},
-      //   body: [{
-      //     "productId": 1,
-      //     "quantity": 1
-      //   }],
-      // };
       const res = {
         status: sinon.stub().callsFake(() => res),
         json: sinon.stub().returns(),

@@ -80,15 +80,16 @@ describe('services/salesServices', () => {
       return chai.expect(salesServices.createSale()).to.eventually.be.rejected;
     });
 
-    it('5.3 should resolves and return an object with keys "id" and "itemsSold" if salesModel.createSale', () => {
+    it('5.3 should resolves and return an object if salesModel.createSale resolves', () => {
       const newSale = {
-        id: 1,
+        id: 5,
         itemsSold: [],
       };
       const saleList = [];
       const id = 1;
-      sinon.stub(salesModel, 'addSaleId').resolves(id);
-      sinon.stub(salesModel, 'createSale').resolves();
+      const list = [{}, {}]
+      
+      sinon.stub(salesModel, 'createSale').resolves(list);
       return chai.expect(salesServices.createSale(saleList)).to.eventually.be.deep.equal(newSale);
     });
   });
@@ -106,4 +107,42 @@ describe('services/salesServices', () => {
     });
   });
 
+  describe('7. Test salesServices.getSaleById function', () => {
+
+    it('7.1 should throw error if salesModel.getSaleById throw error', () => {
+      sinon.stub(salesModel, 'getSaleById').rejects();
+      return chai.expect(salesServices.getSaleById()).to.eventually.be.rejected;
+    });
+
+    it('7.2 should throw error if salesModel.getSaleById returns an empty array', () => {
+      sinon.stub(salesModel, 'getSaleById').resolves([]);
+      chai.expect(salesServices.getSaleById(1)).to.eventually.throw(Error('Sale not found'));
+    });
+
+    it('7.3 should resolves and return an array of objects if salesModel.getSaleById resolves', () => {
+      const list = [[]]
+      sinon.stub(salesModel, 'getSaleById').resolves(list);
+      return chai.expect(salesServices.getSaleById(1)).to.eventually.be.equal;
+    });
+  });
+
+  describe('8. Test salesServices.updateSale function', () => {
+
+    it('8.1 should throw error if salesModel.updateSale throw error', () => {
+      sinon.stub(salesModel, 'updateSale').rejects();
+      return chai.expect(salesServices.updateSale()).to.eventually.be.rejected;
+    });
+
+    it('8.2 should throw error if salesServices.getSaleById throw error', () => {
+      sinon.stub(salesModel, 'updateSale').resolves();
+      sinon.stub(salesServices, 'getSaleById').rejects();
+      return chai.expect(salesServices.updateSale()).to.eventually.be.rejected;
+    });
+
+    it('8.3 should resolves and return an object', () => {
+      sinon.stub(salesModel, 'updateSale').resolves();
+      sinon.stub(salesServices, 'getSaleById').resolves([{}]);
+      return chai.expect(salesServices.updateSale(1, [])).to.eventually.equal;
+    });
+  });
 });

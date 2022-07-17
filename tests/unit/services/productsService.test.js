@@ -87,6 +87,12 @@ describe('services/productsServices', () => {
       const response = await productsServices.productExist(id);
       return chai.expect(response).to.be.true;
     })
+
+    it('6.3 should throw error if productsServices.listIdProduct returns an empty array', async () => {
+      const id = 1;
+      sinon.stub(productsServices, 'listIdProduct').resolves([]);
+      chai.expect(productsServices.productExist(id)).to.eventually.throw(Error('Product not found'));
+    })
   });
 
   describe('7. Test productsServices.updateProduct function', () => {
