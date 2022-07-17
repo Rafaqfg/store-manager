@@ -1,4 +1,4 @@
-  # under construction
+  # this README are under construction.soon you have an english version.
   
   <summary><strong>👨‍💻 O que deverá ser desenvolvido</strong></summary>
 
