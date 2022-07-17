@@ -53,17 +53,48 @@ describe('models/salesModel', () => {
     });
   })
 
-  describe('4. Test salesModel.deleteSale function', () => {
+  describe('4. Test salesModel.getSaleById function', () => {
 
-    it('1.1 should throw error if mysql throw error', () => {
+    it('4.1 should throw error if mysql throw error', () => {
+      sinon.stub(db, 'query').rejects();
+      return chai.expect(salesModel.getSaleById()).to.eventually.be.rejected;
+    });
+
+    it('4.2 should resolves if mysql resolves', async () => {
+      sinon.stub(db, 'query').resolves([]);
+      return chai.expect(salesModel.getSaleById(1)).to.eventually.be.equal;
+    });
+  })
+
+  describe('5. Test salesModel.deleteSale function', () => {
+
+    it('5.1 should throw error if mysql throw error', () => {
       sinon.stub(db, 'query').rejects();
       return chai.expect(salesModel.deleteSale()).to.eventually.be.rejected;
     });
 
-    it('1.2 should return true if mysql resolves', async () => {
+    it('5.2 should return true if mysql resolves', async () => {
       const id = 1;
       sinon.stub(db, 'query').resolves([]);
       return chai.expect(salesModel.deleteSale(1)).to.eventually.be.equal(true);
     });
   });
+
+  describe('6. Test salesModel.updateSale function', () => {
+
+    it('6.1 should throw error if mysql throw error', () => {
+      sinon.stub(db, 'query').rejects();
+      return chai.expect(salesModel.updateSale()).to.eventually.be.rejected;
+    });
+
+    it('6.2 should resolves if mysql resolves', async () => {
+      const sale = [{
+        productId: 1,
+        quantity: 1,
+      }]
+      sinon.stub(db, 'query').resolves([]);
+      return chai.expect(salesModel.updateSale(1, sale)).to.eventually.be.equal;
+    });
+  });
+
 });

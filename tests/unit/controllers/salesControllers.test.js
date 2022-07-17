@@ -50,30 +50,38 @@ describe('controllers/salesControllers', () => {
   })
 
   describe('3. Test createSale function', () => {
+    const obj = {};
+    const sale = [];
+    const isValid = [[1], []];
+    const req = {
+      body: [{
+        "productId": 1,
+        "quantity": 1
+      }],
+    };
+    const res = {
+      status: sinon.stub().callsFake(() => res),
+      json: sinon.stub().returns(),
+    };
 
     it('3.1 should throw error if salesServices.saleIsValid throw error', () => {
-      const sale = [];
       sinon.stub(salesServices, 'saleIsValid').rejects(sale);
       return chai.expect(salesControllers.createSale([])).to.eventually.be.rejected;
     })
-    it('3.2 should throw error if salesServices.validateProductId throw error or return an empty array', () => {
-      const sale = [];
+    it('3.2 should throw error if salesServices.validateProductId throw error', () => {
       sinon.stub(salesServices, 'saleIsValid').resolves(sale);
       sinon.stub(salesServices, 'validateProductId').rejects(false);
       return chai.expect(salesControllers.createSale([])).to.eventually.be.rejected;
     })
 
-    it('3.3 should call res method with status 201 and return an object if createSale resolves', async () => {
-      const obj = {};
-      const req = {
-        body: [{
-          "productId": 1,
-          "quantity": 1
-        }] };
-      const res = {
-        status: sinon.stub().callsFake(() => res),
-        json: sinon.stub().returns(),
-      };
+    it('3.3 should throw error if salesServices.validateProductId return some empty array', () => {
+      
+      sinon.stub(salesServices, 'saleIsValid').resolves(sale);
+      sinon.stub(salesServices, 'validateProductId').resolves(isValid);
+      chai.expect(salesControllers.createSale(req, res)).to.eventually.throw(Error('Product not found'))
+    })
+
+    it('3.4 should call res method with status 201 and return an object if createSale resolves', async () => {
       sinon.stub(salesServices, 'createSale').resolves(obj);
       await salesControllers.createSale(req, res);
       chai.expect(res.status.getCall(0).args[0]).to.equal(201);
@@ -107,7 +115,7 @@ describe('controllers/salesControllers', () => {
   })
 
   describe('5. Test updateSale function', () => {
-    const obj = {};
+    const isValid = [[1], []];
     const sale = [];
     const res = {};
     const req = {
@@ -141,15 +149,20 @@ describe('controllers/salesControllers', () => {
     })
 
     it('5.4 should throw error if salesServices.validateProductId returns an empty array', async () => {
+      // const req = {
+      //   params: {id: 1},
+      //   body: [{
+      //     "productId": 1,
+      //     "quantity": 1
+      //   }],
+      // };
       const res = {
         status: sinon.stub().callsFake(() => res),
         json: sinon.stub().returns(),
       };
       sinon.stub(salesServices, 'saleExist').resolves(true);
       sinon.stub(salesServices, 'saleIsValid').resolves(sale);
-      sinon.stub(salesServices, 'validateProductId').resolves([]);
-      await salesControllers.updateSale(req, res);
-      // return chai.expect(response).to.eventually.throw(Error);
+      sinon.stub(salesServices, 'validateProductId').resolves(isValid);
       chai.expect(salesControllers.updateSale(req, res)).to.eventually.throw(Error('Product not found'))
     })
 
@@ -163,7 +176,6 @@ describe('controllers/salesControllers', () => {
     })
 
     it('5.6 should call res method with status 200 and return an object if updateSale resolves', async () => {
-      const res = {};
       const result = {
         saleId: 2,
         itemsUpdated: [
