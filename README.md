@@ -1,5 +1,13 @@
-  # this README are under construction.soon you have an english version.
+  # Store Manager
   
+  ### [EN]
+  
+  In this project, I was responsible for developing an API with full CRUD functionality using the MSC architecture, using MySQL2 as the database and executing SQL queries.
+  
+  <br>
+  <br>
+  
+ ### [PT]
   <summary><strong>👨‍💻 O que deverá ser desenvolvido</strong></summary>
 
   Você vai desenvolver sua primeira API utilizando a arquitetura MSC (model-service-controller)!
